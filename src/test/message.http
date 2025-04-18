@@ -1,0 +1,4 @@
+POST http://localhost:8008/ingest
+Content-Type: application/json
+
+{"message": "test"}

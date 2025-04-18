@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h3 {
+            padding: 10px;
+            margin: 0;
+            background: #333;
+            color: white;
+        }
+
+        #controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px;
+            background: #222;
+            color: white;
+        }
+
+        .filter-btn {
+            border-radius: 50%;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+        }
+
+        .filter-btn.red {
+            border: 2px solid white;
+        }
+
+        .filter-btn.orange {
+            border: 2px solid white;
+        }
+
+        .filter-btn.green {
+            border: 2px solid white;
+        }
+
+        .filter-btn.active.red {
+            background: red;
+        }
+
+        .filter-btn.red:not(.active) {
+            background: none;
+            border: 2px solid red;
+        }
+
+        .filter-btn.active.green {
+            background: green;
+        }
+
+        .filter-btn.green:not(.active) {
+            background: none;
+            border: 2px solid green;
+        }
+
+        .filter-btn.active.purple {
+            background: purple;
+        }
+
+        .filter-btn.purple:not(.active) {
+            background: none;
+            border: 2px solid purple;
+        }
+
+        .filter-btn.filter-btn.active.orange {
+            background: orange;
+        }
+
+        .filter-btn.orange:not(.active) {
+            background: none;
+            border: 2px solid orange;
+        }
+
+        .filter-btn-level.active[data-level="success"] {
+            fill: green;
+            stroke: white;
+        }
+
+        .filter-btn-level.active[data-level="warning"] {
+            fill: orange;
+            stroke: white;
+        }
+
+        .filter-btn-level.active[data-level="error"] {
+            fill: red;
+            stroke: white;
+        }
+
+        .filter-btn-level:not(.active) {
+            fill: none;
+        }
+
+        .filter-btn-level[data-level="success"] {
+            stroke: green;
+        }
+
+        .filter-btn-level[data-level="warning"] {
+            stroke: orange;
+        }
+
+        .filter-btn-level[data-level="error"] {
+            stroke: red;
+        }
+
+        .filter-btn-level {
+            width: 25px;
+            height: 25px;
+            stroke-width: 2px;
+        }
+
+        #searchInput {
+            flex: 1;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #666;
+            background: #1e1e1e;
+            color: white;
+        }
+
+        #livelogContainer {
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+            background-color: #1e1e1e;
+        }
+
+        .json-block {
+            border-left: 4px solid gray;
+            background: #252526;
+            color: #dcdcdc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 13px;
+        }
+    </style>
+    <script type="module" src="{{collapser}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossOrigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <h3>LiveLog</h3>
+    <div id="controls" style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div style="display: flex; gap:2px; align-items: center;">
+            <div class="filter-btn red active" data-color="red"></div>
+            <div class="filter-btn orange active" data-color="orange"></div>
+            <div class="filter-btn green active" data-color="green"></div>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <svg class="filter-btn-level active" data-level="success" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <svg class="filter-btn-level active" data-level="warning" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+            </svg>
+            <svg class="filter-btn-level active" data-level="error" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+        </div>
+        <input type="text" id="searchInput" placeholder="Search..." />
+    </div>
+    <div id="livelogContainer"></div>
+    <div>
+        <button id="clearBtn" style="margin: 10px; padding: 5px 10px;">Clear</button>
+    </div>
+    <script>
+        const container = document.getElementById('livelogContainer');
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const filterLevelButtons = document.querySelectorAll('.filter-btn-level');
+        const allMessages = [];
+        const vscode = acquireVsCodeApi();
+
+        const activeColors = new Set();
+        const activeLevels = new Set();
+        let searchTerm = '';
+
+        filterButtons.forEach(btn => {
+            if (btn.dataset.color) {
+                activeColors.add(btn.dataset.color);
+            }
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                const color = btn.dataset.color;
+                if (color) {
+                    activeColors.has(color) ? activeColors.delete(color) : activeColors.add(color);
+                }
+                renderMessages();
+            });
+        });
+
+        filterLevelButtons.forEach(btn => {
+            if (btn.dataset.level) {
+                activeLevels.add(btn.dataset.level);
+            }
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                const level = btn.dataset.level;
+                if (level) {
+                    activeLevels.has(level) ? activeLevels.delete(level) : activeLevels.add(level);
+                }
+                renderMessages();
+            });
+
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            vscode.postMessage({ command: 'clear' });
+        });
+
+        searchInput.addEventListener('input', () => {
+            searchTerm = searchInput.value.trim().toLowerCase();
+            renderMessages();
+        });
+
+        function renderMessages() {
+            container.innerHTML = '';
+            for (const msg of allMessages) {
+                console.log(msg);
+                const jsonText = JSON.stringify(msg.data.message, null, 2);
+                console.log(jsonText);
+                const text = JSON.stringify(msg.data.message).toLowerCase();
+
+                const colorOk = activeColors.has(msg.data.color);
+                const levelOk = activeLevels.has(msg.data.level);
+                const textOk = searchTerm === '' || text.includes(searchTerm);
+
+                if (colorOk && levelOk && textOk) {
+                    console.log(msg);
+                    switch (msg.type) {
+                        case 'message': {
+                            const block = document.createElement('div');
+                            block.className = 'json-block';
+                            block.style.borderLeftColor = msg.data.color || 'gray';
+                            block.innerText = jsonText;
+                            container.appendChild(block);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('message', event => {
+            switch (event.type) {
+                case 'clear': {
+                    console.log('Clearing');
+                    allMessages.length = 0;
+                    renderMessages();
+                    break;
+                }
+                case 'message': {
+                    console.log(event.data);
+                    allMessages.unshift(event.data);
+                    renderMessages();
+                    break;
+                }
+                default: { }
+            }
+        });
+    </script>
+</body>
+
+</html>
