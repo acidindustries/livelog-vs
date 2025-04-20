@@ -14,8 +14,20 @@
   "contributes": {
     "commands": [
       {
-        "command": "livelog.helloWorld",
-        "title": "Hello World"
+        "command": "livelog.sendMessage",
+        "title": "Livelog: Send Message"
+      },
+      {
+        "command": "livelog.sendJSON",
+        "title": "Livelog: Send JSON"
+      },
+      {
+        "command": "livelog.sendSpacer",
+        "title": "Livelog: Send Spacer"
+      },
+      {
+        "command": "livelog.sendVariable",
+        "title": "Livelog: Send Variable"
       }
     ],
     "viewsContainers": {

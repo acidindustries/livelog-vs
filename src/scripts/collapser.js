@@ -157,5 +157,3 @@ class JsonView {
         targetElem.prepend(this.#render(this.#tree.root, colorMap))
     }
 }
-
-export { JsonView, Tree };

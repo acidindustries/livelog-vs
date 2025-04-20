@@ -22,7 +22,7 @@ export class StorageProvider {
         this.saveMessages();
     }
 
-    private saveMessages() {
+    public saveMessages() {
         this.context.globalState.update(this.storageKey, this.messages);
     }
 
