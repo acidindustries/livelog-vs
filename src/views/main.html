@@ -139,6 +139,12 @@
             --_size: 1.75rem !important;
             gap: 0.75rem !important;
         }
+
+        footer.footer {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/beercss@3.10.7/dist/cdn/beer.min.css" rel="stylesheet" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.10.7/dist/cdn/beer.min.js"></script>
@@ -213,69 +219,6 @@
             </button>
         </footer>
     </div>
-    <!-- <main style="display: flex; flex-direction: column; height: 100vh;">
-        <div style="flex: 0 0 auto; display: flex; flex-direction: column;">
-            <div style="display: flex; justify-content: space-between;">
-                <div id="color-controls">
-                    <i class="medium circle fill grey-text" data-color="default">radio_button_unchecked</i>
-                    <i class="medium circle fill red-text" data-color="red">radio_button_unchecked</i>
-                    <i class="medium circle fill yellow-text" data-color="yellow">radio_button_unchecked</i>
-                    <i class="medium circle fill orange-text" data-color="orange">radio_button_unchecked</i>
-                    <i class="medium circle fill purple-text" data-color="purple">radio_button_unchecked</i>
-                    <i class="medium circle fill green-text" data-color="green">radio_button_unchecked</i>
-                    <i class="medium circle fill blue-text" data-color="blue">radio_button_unchecked</i>
-                </div>
-                <div id="level-controls">
-                    <i class="medium  circle fill blue-text" data-level="info">info</i>
-                    <i class="medium circle fill green-text" data-level="success">check_circle</i>
-                    <i class="medium circle fill orange-text" data-level="warning">warning</i>
-                    <i class="medium circle fill red-text" data-level="error">info</i>
-                </div>
-            </div>
-            <div id="search-controls" class="grid">
-
-                <div class="s6">
-                </div>
-            </div>
-            <div class="s6">
-                <div class="field suffix border round small">
-                    <input type="text" id="searchInput">
-                    <i>search</i>
-                </div>
-            </div>
-        </div>
-        </div>
-        <template id="log-template">
-            <li class="log-chunk">
-                <i class="log-type tiny"></i>
-                <div>
-                    <label class="log-date small">08:00 AM</label>
-                </div>
-                <div class="max">
-                    <div class="log-content"></div>
-                    <div class="log-details" style="display: flex; flex-direction:column;">
-                    </div>
-                </div>
-            </li>
-        </template>
-        <ul class="list border no-space" id="logs"
-            style="flex: 1 1 auto; min-height: 0; overflow-y:auto; padding: 0; margin: 0;"></ul>
-    </main>
-
-    <div id="bottom-controls">
-        <div id="buffer-filters">
-            <i>folder</i>
-            <div id="buffer-filters-chips">
-                <button id="buffers-all" class="chip small round">
-                    <span>All</span>
-                    <i class="buffer-icon">check</i>
-                </button>
-            </div>
-        </div>
-        <button class="transparent circle right-round bottom-round" id="clearBtn">
-            <i>delete</i>
-        </button>
-    </div> -->
     <script>
         const vscode = acquireVsCodeApi();
         let state = vscode.getState();

@@ -3,6 +3,7 @@
   "displayName": "livelog",
   "description": "",
   "version": "0.0.1",
+  "icon": "media/icon.png",
   "engines": {
     "vscode": "^1.99.0"
   },
@@ -12,24 +13,6 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "livelog.sendMessage",
-        "title": "Livelog: Send Message"
-      },
-      {
-        "command": "livelog.sendJSON",
-        "title": "Livelog: Send JSON"
-      },
-      {
-        "command": "livelog.sendSpacer",
-        "title": "Livelog: Send Spacer"
-      },
-      {
-        "command": "livelog.sendVariable",
-        "title": "Livelog: Send Variable"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
