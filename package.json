@@ -2,8 +2,13 @@
   "name": "livelog",
   "displayName": "livelog",
   "description": "",
+  "publisher": "AcidIndustriesInc",
   "version": "0.0.1",
-  "icon": "media/icon.png",
+  "icon": "./media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/acidindustries/livelog-vs"
+  },
   "engines": {
     "vscode": "^1.99.0"
   },
@@ -18,7 +23,7 @@
         {
           "id": "livelogSidebar",
           "title": "Livelog",
-          "icon": "media/icon.png"
+          "icon": "./media/icon.png"
         }
       ]
     },
@@ -26,7 +31,7 @@
       "livelogSidebar": [
         {
           "id": "livelogSidebarView",
-          "name": "Livelog 🔴",
+          "name": "Livelog",
           "type": "webview"
         }
       ]
