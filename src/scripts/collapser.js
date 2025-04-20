@@ -55,11 +55,11 @@ class Tree {
 class JsonView {
     static DefaultColorMap = {
         text: {
-            string: "text-lime-600",
-            number: "text-orange-600",
-            boolean: "text-indigo-600",
-            array: "text-gray-600 dark:text-white",
-            object: "text-gray-600 dark:text-white",
+            string: "lime-text",
+            number: "orange-text",
+            boolean: "indigo-text",
+            array: "secondary-text",
+            object: "secondary-primary",
         },
         bg: {
             object: undefined,
@@ -111,8 +111,8 @@ class JsonView {
             }
         }
 
-        const arrowIcon = ["object", "array"].includes(node.type) ? node.value !== null ? `<i class="fas fa-caret-right"></i>` : "" : "";
-        const divFlag = document.createRange().createContextualFragment(`<div style="margin-left:${node.depth * 18}px">${arrowIcon}</div>`)
+        const arrowIcon = ["object", "array"].includes(node.type) ? node.value !== null ? `<i>chevron_right</i>` : "" : "";
+        const divFlag = document.createRange().createContextualFragment(`<div style="margin-left:${node.depth * 9}px">${arrowIcon}</div>`)
         const divElem = divFlag.querySelector("div")
 
         const textColor = colorMap.text[node.type] !== undefined ? colorMap.text[node.type] : ""
@@ -121,7 +121,7 @@ class JsonView {
 
         const keyName = node.depth !== 0 ? node.key + JsonView.SEPARATOR : "" // depth = 0 its key is "root" which is created by the system, so ignore it.
         const spanFlag = document.createRange().createContextualFragment(
-            `<span class="ms-2">${keyName}<span class="${valueStyle}">${getValue(node)}</span><span class="dark:text-gray-300 text-gray-600 text-xs pl-1 text-opacity-25">(${node.type})</span></span>`
+            `<span style="margin-inline-start: 2px;">${keyName}<span class="${valueStyle}">${getValue(node)}</span><span>(${node.type})</span></span>`
         )
 
         const isCollapsible = ["object", "array"].includes(node.type)
@@ -137,7 +137,7 @@ class JsonView {
                     subElem.dataset.toggle = subElem.dataset.toggle === undefined ? "none" :
                         subElem.dataset.toggle === "none" ? "" : "none"
 
-                    e.target.className = subElem.dataset.toggle === "none" ? "fas fa-caret-right" : "fas fa-caret-down" // Change the icon to ▶ or ▼
+                    e.target.innerText = subElem.dataset.toggle === "none" ? "chevron_right" : "keyboard_arrow_down" // Change the icon to ▶ or ▼
 
                     subElem.querySelectorAll(`*`).forEach(e => e.style.display = subElem.dataset.toggle)
                 })
