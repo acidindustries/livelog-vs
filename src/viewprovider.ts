@@ -59,8 +59,8 @@ export class LivelogViewProvider implements vscode.WebviewViewProvider {
     }
 
     private getHtmlContent(webview: vscode.Webview): string {
-        const filePath = vscode.Uri.file(path.join(this.context.extensionPath, 'src', 'views', 'main.html'));
-        const collapserUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'src', 'scripts', 'collapser.js'));
+        const filePath = vscode.Uri.file(path.join(this.context.extensionPath, 'views', 'main.html'));
+        const collapserUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'scripts', 'collapser.js'));
         let data = fs.readFileSync(filePath.fsPath, 'utf8');
         data = data.replace("{{collapser}}", collapserUri.toString());
         return data;

@@ -29,8 +29,8 @@ export class Backend {
             });
         });
 
-        this._server.listen(8008, () => {
-            console.log('Listening on port 8008...');
+        this._server.listen(8000, () => {
+            console.log('Listening on port 8000...');
         });
     }
 
