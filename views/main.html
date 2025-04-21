@@ -146,6 +146,10 @@
             flex-direction: row;
             justify-content: space-between;
         }
+
+        .small-text.source {
+            word-break: break-all;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/beercss@3.10.7/dist/cdn/beer.min.css" rel="stylesheet" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.10.7/dist/cdn/beer.min.js"></script>
@@ -217,7 +221,13 @@
     </div>
     <script>
         const vscode = acquireVsCodeApi();
-        let state = vscode.getState();
+        let state = vscode.getState() ?? {
+            allBuffers: new Set(),
+            activeBuffers: new Set(),
+            activeColors: new Set(),
+            activeLevels: new Set(),
+            messages: [],
+        };
 
         document.getElementById('buffers-all').addEventListener('click', (e) => {
             const iconHolder = e.target.querySelector('i');
@@ -238,7 +248,7 @@
         const filterButtons = document.querySelectorAll('#color-controls > i');
         const filterLevelButtons = document.querySelectorAll('.filter-btn-level');
         const bufferChips = document.getElementById('buffer-filters-chips');
-        let allMessages = state.messages ?? [];
+        let allMessages = state?.messages ?? [];
 
         const activeColors = Object.keys(state.activeColors).length === 0 ? new Set() : state.activeColors;
         const activeLevels = Object.keys(state.activeLevels).length === 0 ? new Set() : state.activeLevels;
@@ -293,11 +303,13 @@
             container.innerHTML = '';
             updateState();
             for (const msg of allMessages) {
+                msg.color = msg.color ?? 'default';
+
                 const text = [
                     msg.payload_data.message,
-                    JSON.stringify(msg.payload_data.data),
-                    msg.source,
-                    msg.buffer]
+                    JSON.stringify(msg.payload_data.data ?? ''),
+                    JSON.stringify(msg.source),
+                    msg.buffer ?? '']
                     .map(s => {
                         if (s === undefined) {
                             return '';
@@ -330,7 +342,7 @@
                     date.innerText = new Date(msg.date).toLocaleTimeString();
                     container.appendChild(block);
 
-                    switch (msg.payload_data.type) {
+                    switch (msg.payload_data.type.toLowerCase()) {
                         case 'message': {
                             type.innerText = 'chat_bubble';
                             const message = document.createElement('div');
@@ -364,10 +376,10 @@
                         default: { console.error(`Invalid payload type ${msg.payload_data.type}`); }
                     }
 
-                    if (msg.source && msg.source.length > 0) {
+                    if (msg.source) {
                         const sourceLine = document.createElement('span');
-                        sourceLine.classList.add('small-text');
-                        sourceLine.innerText = msg.source;
+                        sourceLine.classList.add('small-text', 'source');
+                        sourceLine.innerText = `${msg.source.file}:${msg.source.line}`;
                         details.appendChild(sourceLine);
                     }
                 }
@@ -448,6 +460,7 @@
             let jsonView = new JsonView(tree);
             jsonView.render(node);
         }
+
 
         (() => {
             const allBuffersSetting = document.getElementById('buffers-all').querySelector('i').innerText;

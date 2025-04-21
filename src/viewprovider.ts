@@ -18,9 +18,9 @@ export class LivelogViewProvider implements vscode.WebviewViewProvider {
         webviewView.webview.options = {
             enableScripts: true,
             localResourceRoots: [
-                vscode.Uri.joinPath(this.context.extensionUri, 'src', 'media'),
-                vscode.Uri.joinPath(this.context.extensionUri, 'src', 'views'),
-                vscode.Uri.joinPath(this.context.extensionUri, 'src', 'scripts'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'media'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'views'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'scripts'),
             ]
         };
 

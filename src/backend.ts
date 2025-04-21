@@ -16,7 +16,6 @@ export class Backend {
 
             req.on('end', () => {
                 try {
-                    console.log(body);
                     const json = JSON.parse(body);
                     viewProvider.postJsonToWebView(json, false);
                     res.writeHead(200, { 'Content-Type': 'application/json' });
